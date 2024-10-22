@@ -726,14 +726,6 @@ std::string _Add_Cusp_table(
     // Sampler function
     GpuShaderText ss(shaderCreator->getLanguage());
 
-    const std::string hues_array_name = name + "_hues_array";
-    std::vector<float> hues_array(g.gamut_cusp_table.total_size);
-    for (int i = 0; i < g.gamut_cusp_table.total_size; ++i)
-    {
-        hues_array[i] = g.gamut_cusp_table.table[i][2];
-    }
-    ss.declareFloatArrayConst(hues_array_name, (int) hues_array.size(), hues_array.data());
-
     ss.newLine() << ss.float2Keyword() << " " << name << "_sample(float h)";
     ss.newLine() << "{";
     ss.indent();
@@ -750,7 +742,14 @@ std::string _Add_Cusp_table(
     ss.newLine() << "{";
     ss.indent();
 
-    ss.newLine() << ss.floatDecl("hcur") << " = " << hues_array_name << "[i];";
+    if (dimensions == GpuShaderDesc::TEXTURE_1D)
+    {
+        ss.newLine() << ss.floatDecl("hcur") << " = " << ss.sampleTex1D(name, std::string("(i + 0.5) / ") + std::to_string(g.gamut_cusp_table.total_size)) << ".b;";
+    }
+    else
+    {
+        ss.newLine() << ss.floatDecl("hcur") << " = " << ss.sampleTex2D(name, ss.float2Const(std::string("(i + 0.5) / ") + std::to_string(g.gamut_cusp_table.total_size), "0.5")) << ".b;";
+    }
 
     ss.newLine() << "if (h > hcur)";
     ss.newLine() << "{";

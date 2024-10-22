@@ -168,7 +168,7 @@ std::string getTexSample(GpuLanguage lang,
         }
         case GPU_LANGUAGE_HLSL_DX11:
         {
-            kw << textureName << ".Sample(" << samplerName << ", " << coords << ")";
+            kw << textureName << ".SampleLevel(" << samplerName << ", " << coords << ", 0)";
             break;
         }
         case GPU_LANGUAGE_GLSL_4_0:
