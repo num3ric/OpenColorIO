@@ -1,13 +1,20 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright Contributors to the OpenColorIO Project.
 
+set(INCLUDES
+    argparse.h
+    strutil.h
+    logGuard.h
+    measure.h
+)
+
 set(SOURCES
     argparse.cpp
     strutil.cpp
     logGuard.cpp
 )
 
-add_library(apputils STATIC ${SOURCES})
+add_library(apputils STATIC ${INCLUDES} ${SOURCES})
 
 target_include_directories(apputils 
     PUBLIC

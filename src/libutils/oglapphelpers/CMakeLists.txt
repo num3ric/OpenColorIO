@@ -31,7 +31,7 @@ if(APPLE)
 
 endif()
 
-add_library(oglapphelpers STATIC ${SOURCES})
+add_library(oglapphelpers STATIC ${INCLUDES} ${SOURCES})
 set_target_properties(oglapphelpers PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(oglapphelpers PROPERTIES OUTPUT_NAME OpenColorIOoglapphelpers)
 

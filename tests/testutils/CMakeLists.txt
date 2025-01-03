@@ -1,11 +1,15 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright Contributors to the OpenColorIO Project.
 
+set(INCLUDES
+    UnitTest.h
+)
+
 set(SOURCES
     UnitTest.cpp
 )
 
-add_library(testutils STATIC ${SOURCES})
+add_library(testutils STATIC ${INCLUDES} ${SOURCES})
 
 set_target_properties(testutils PROPERTIES
     COMPILE_OPTIONS "${PLATFORM_COMPILE_OPTIONS}"

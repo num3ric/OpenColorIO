@@ -1,11 +1,15 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright Contributors to the OpenColorIO Project.
 
+set(INCLUDES
+    imageio.h
+)
+
 set(SOURCES
     imageio.cpp
 )
 
-add_library(imageioapphelpers STATIC ${SOURCES})
+add_library(imageioapphelpers STATIC ${INCLUDES} ${SOURCES})
 set_target_properties(imageioapphelpers PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(imageioapphelpers PROPERTIES OUTPUT_NAME OpenColorIOimageioapphelpers)
 

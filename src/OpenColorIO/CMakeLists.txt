@@ -1,190 +1,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright Contributors to the OpenColorIO Project.
 
-set(SOURCES
-    apphelpers/CategoryHelpers.cpp
-    apphelpers/ColorSpaceHelpers.cpp
-    apphelpers/DisplayViewHelpers.cpp
-    apphelpers/LegacyViewingPipeline.cpp
-    apphelpers/MixingHelpers.cpp
-    Baker.cpp
-    BakingUtils.cpp
-    BitDepthUtils.cpp
-    builtinconfigs/BuiltinConfigRegistry.cpp
-    builtinconfigs/CGConfig.cpp
-    builtinconfigs/StudioConfig.cpp
-    Caching.cpp
-    ColorSpace.cpp
-    ColorSpaceSet.cpp
-    Config.cpp
-    ConfigUtils.cpp
-    Context.cpp
-    ContextVariableUtils.cpp
-    CPUInfo.cpp
-    CPUProcessor.cpp
-    Display.cpp
-    DynamicProperty.cpp
-    Exception.cpp
-    fileformats/cdl/CDLParser.cpp
-    fileformats/cdl/CDLReaderHelper.cpp
-    fileformats/cdl/CDLWriter.cpp
-    fileformats/ctf/CTFReaderHelper.cpp
-    fileformats/ctf/CTFReaderUtils.cpp
-    fileformats/ctf/CTFTransform.cpp
-    fileformats/ctf/IndexMapping.cpp
-    fileformats/FileFormat3DL.cpp
-    fileformats/FileFormatCCC.cpp
-    fileformats/FileFormatCC.cpp
-    fileformats/FileFormatCDL.cpp
-    fileformats/FileFormatCSP.cpp
-    fileformats/FileFormatCTF.cpp
-    fileformats/FileFormatDiscreet1DL.cpp
-    fileformats/FileFormatHDL.cpp
-    fileformats/FileFormatICC.cpp
-    fileformats/FileFormatIridasCube.cpp
-    fileformats/FileFormatIridasItx.cpp
-    fileformats/FileFormatIridasLook.cpp
-    fileformats/FileFormatPandora.cpp
-    fileformats/FileFormatResolveCube.cpp
-    fileformats/FileFormatSpi1D.cpp
-    fileformats/FileFormatSpi3D.cpp
-    fileformats/FileFormatSpiMtx.cpp
-    fileformats/FileFormatTruelight.cpp
-    fileformats/FileFormatUtils.cpp
-    fileformats/FileFormatVF.cpp
-    fileformats/FormatMetadata.cpp
-    fileformats/xmlutils/XMLReaderHelper.cpp
-    fileformats/xmlutils/XMLReaderUtils.cpp
-    fileformats/xmlutils/XMLWriterUtils.cpp
-    FileRules.cpp
-    GPUProcessor.cpp
-    GpuShader.cpp
-    GpuShaderDesc.cpp
-    GpuShaderClassWrapper.cpp
-    GpuShaderUtils.cpp
-    HashUtils.cpp
-    ImageDesc.cpp
-    ImagePacking.cpp
-    Logging.cpp
-    Look.cpp
-    LookParse.cpp
-    MathUtils.cpp
-    NamedTransform.cpp
-    OCIOYaml.cpp
-    OCIOZArchive.cpp
-    Op.cpp
-    OpOptimizers.cpp
-    ops/allocation/AllocationOp.cpp
-    ops/cdl/CDLOpCPU.cpp
-    ops/cdl/CDLOpData.cpp
-    ops/cdl/CDLOpGPU.cpp
-    ops/cdl/CDLOp.cpp
-    ops/exponent/ExponentOp.cpp
-    ops/exposurecontrast/ExposureContrastOpCPU.cpp
-    ops/exposurecontrast/ExposureContrastOpData.cpp
-    ops/exposurecontrast/ExposureContrastOpGPU.cpp
-    ops/exposurecontrast/ExposureContrastOp.cpp
-    ops/fixedfunction/ACES2/Transform.cpp
-    ops/fixedfunction/FixedFunctionOpCPU.cpp
-    ops/fixedfunction/FixedFunctionOpData.cpp
-    ops/fixedfunction/FixedFunctionOpGPU.cpp
-    ops/fixedfunction/FixedFunctionOp.cpp
-    ops/gamma/GammaOpCPU.cpp
-    ops/gamma/GammaOpData.cpp
-    ops/gamma/GammaOpGPU.cpp
-    ops/gamma/GammaOpUtils.cpp
-    ops/gamma/GammaOp.cpp
-    ops/gradingprimary/GradingPrimary.cpp
-    ops/gradingprimary/GradingPrimaryOpCPU.cpp
-    ops/gradingprimary/GradingPrimaryOpData.cpp
-    ops/gradingprimary/GradingPrimaryOpGPU.cpp
-    ops/gradingprimary/GradingPrimaryOp.cpp
-    ops/gradingrgbcurve/GradingBSplineCurve.cpp
-    ops/gradingrgbcurve/GradingRGBCurveOpCPU.cpp
-    ops/gradingrgbcurve/GradingRGBCurveOpData.cpp
-    ops/gradingrgbcurve/GradingRGBCurveOpGPU.cpp
-    ops/gradingrgbcurve/GradingRGBCurveOp.cpp
-    ops/gradingrgbcurve/GradingRGBCurve.cpp
-    ops/gradingtone/GradingTone.cpp
-    ops/gradingtone/GradingToneOpCPU.cpp
-    ops/gradingtone/GradingToneOpData.cpp
-    ops/gradingtone/GradingToneOpGPU.cpp
-    ops/gradingtone/GradingToneOp.cpp
-    ops/log/LogOpCPU.cpp
-    ops/log/LogOpData.cpp
-    ops/log/LogOpGPU.cpp
-    ops/log/LogOp.cpp
-    ops/log/LogUtils.cpp
-    ops/lut1d/Lut1DOp.cpp
-    ops/lut1d/Lut1DOpCPU.cpp
-    ops/lut1d/Lut1DOpCPU_SSE2.cpp
-    ops/lut1d/Lut1DOpCPU_AVX.cpp
-    ops/lut1d/Lut1DOpCPU_AVX2.cpp
-    ops/lut1d/Lut1DOpCPU_AVX512.cpp
-    ops/lut1d/Lut1DOpData.cpp
-    ops/lut1d/Lut1DOpGPU.cpp
-    ops/lut3d/Lut3DOp.cpp
-    ops/lut3d/Lut3DOpCPU.cpp
-    ops/lut3d/Lut3DOpCPU_SSE2.cpp
-    ops/lut3d/Lut3DOpCPU_AVX.cpp
-    ops/lut3d/Lut3DOpCPU_AVX2.cpp
-    ops/lut3d/Lut3DOpCPU_AVX512.cpp
-    ops/lut3d/Lut3DOpData.cpp
-    ops/lut3d/Lut3DOpGPU.cpp
-    ops/matrix/MatrixOpCPU.cpp
-    ops/matrix/MatrixOpData.cpp
-    ops/matrix/MatrixOpGPU.cpp
-    ops/matrix/MatrixOp.cpp
-    ops/noop/NoOps.cpp
-    ops/OpTools.cpp
-    ops/range/RangeOpCPU.cpp
-    ops/range/RangeOpData.cpp
-    ops/range/RangeOpGPU.cpp
-    ops/range/RangeOp.cpp
-    ops/reference/ReferenceOpData.cpp
-    ParseUtils.cpp
-    PathUtils.cpp
-    Platform.cpp
-    Processor.cpp
-    ScanlineHelper.cpp
-    Transform.cpp
-    transforms/AllocationTransform.cpp
-    transforms/builtins/ACES.cpp
-    transforms/builtins/BuiltinTransformRegistry.cpp
-    transforms/builtins/ColorMatrixHelpers.cpp
-    transforms/builtins/OpHelpers.cpp
-    transforms/builtins/AppleCameras.cpp
-    transforms/builtins/ArriCameras.cpp
-    transforms/builtins/CanonCameras.cpp
-    transforms/builtins/Displays.cpp
-    transforms/builtins/PanasonicCameras.cpp
-    transforms/builtins/RedCameras.cpp
-    transforms/builtins/SonyCameras.cpp
-    transforms/BuiltinTransform.cpp
-    transforms/CDLTransform.cpp
-    transforms/ColorSpaceTransform.cpp
-    transforms/DisplayViewTransform.cpp
-    transforms/ExponentTransform.cpp
-    transforms/ExponentWithLinearTransform.cpp
-    transforms/ExposureContrastTransform.cpp
-    transforms/FileTransform.cpp
-    transforms/FixedFunctionTransform.cpp
-    transforms/GradingPrimaryTransform.cpp
-    transforms/GradingRGBCurveTransform.cpp
-    transforms/GradingToneTransform.cpp
-    transforms/GroupTransform.cpp
-    transforms/LogAffineTransform.cpp
-    transforms/LogCameraTransform.cpp
-    transforms/LogTransform.cpp
-    transforms/LookTransform.cpp
-    transforms/Lut1DTransform.cpp
-    transforms/Lut3DTransform.cpp
-    transforms/MatrixTransform.cpp
-    transforms/RangeTransform.cpp
-    ViewingRules.cpp
-    ViewTransform.cpp
-    SystemMonitor.cpp
-)
+file(GLOB_RECURSE INCLUDES ${CMAKE_CURRENT_SOURCE_DIR} *.h)
+file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 
 # Install the pkg-config file.
 
@@ -210,6 +28,9 @@ endif()
 configure_file(res/OpenColorIO.pc.in ${CMAKE_CURRENT_BINARY_DIR}/OpenColorIO.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenColorIO.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
+set_source_files_properties(SystemMonitor_macos.cpp PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties(SystemMonitor_windows.cpp PROPERTIES HEADER_FILE_ONLY TRUE)
+
 if(OCIO_USE_SIMD AND (OCIO_ARCH_X86 OR OCIO_USE_SSE2NEON))
     # Note that these files are gated by preprocessors to remove them based on the OCIO_USE_* vars.
     set_property(SOURCE ops/lut1d/Lut1DOpCPU_SSE2.cpp APPEND PROPERTY COMPILE_OPTIONS ${OCIO_SSE2_ARGS})
@@ -224,7 +45,7 @@ endif()
 
 configure_file(CPUInfoConfig.h.in CPUInfoConfig.h)
 
-add_library(OpenColorIO ${SOURCES})
+add_library(OpenColorIO ${INCLUDES} ${SOURCES})
 
 # Require at least a C++11 compatible compiler for consumer projects.
 target_compile_features(OpenColorIO
